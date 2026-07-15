@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>おうち時間 収益化タイプ診断</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== Fammトンマナ：白 / マスタード / グリーン / ティール / 淡イエロー・警告色なし ===== */
+:root{
+  --mustard:#E8A24C; --mustard-d:#D6852B;
+  --green:#B5D04E;   --green-d:#8FB030;
+  --teal:#7DB8B8;    --teal-d:#5C9A9A;
+  --cream:#FFF9EE;   --cream2:#FDF3DD;
+  --ink:#4A4438; --ink-soft:#8C846F; --line:#EFE4CC;
+  --white:#fff;
+  --shadow:0 12px 30px rgba(214,133,43,.14);
+  --shadow-sm:0 5px 16px rgba(214,133,43,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"Zen Maru Gothic","Noto Sans JP","游ゴシック体",YuGothic,sans-serif;
+  color:var(--ink); line-height:1.75; font-size:15px;
+  background:linear-gradient(165deg,#FFF6E6 0%,#FDF0DC 50%,#F3F6E4 100%);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:440px;margin:0 auto;min-height:100vh;position:relative;
+  background:var(--cream);box-shadow:0 0 60px rgba(160,120,50,.14);overflow:hidden;}
+.wrap::before,.wrap::after{content:"";position:fixed;z-index:0;pointer-events:none;filter:blur(46px);opacity:.5;}
+.wrap::before{width:260px;height:260px;left:-80px;top:40px;background:radial-gradient(circle,#F3D488,transparent 70%);}
+.wrap::after{width:280px;height:280px;right:-100px;top:420px;background:radial-gradient(circle,#CFE38C,transparent 70%);}
+
+/* topbar */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:9px;}
+.topbar .logo{width:32px;height:32px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--mustard),var(--green));display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:16px;box-shadow:0 3px 8px rgba(214,133,43,.3);}
+.topbar .tt{flex:1;min-width:0;}
+.topbar .tt .nm{font-weight:900;font-size:13.5px;color:var(--mustard-d);}
+.topbar .tt .sub{font-size:10px;color:var(--ink-soft);}
+.topbar .badge{font-size:9.5px;background:var(--cream2);color:var(--mustard-d);padding:3px 9px;border-radius:20px;font-weight:700;}
+
+.view{display:none;position:relative;z-index:1;padding:20px 18px 40px;animation:fade .4s ease;}
+.view.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes pop{0%{transform:scale(.9);opacity:0;}100%{transform:scale(1);opacity:1;}}
+
+/* ===== intro ===== */
+.hero{text-align:center;padding:14px 6px 6px;}
+.hero .kicker{display:inline-block;font-size:11px;font-weight:700;color:var(--teal-d);
+  background:#fff;border:1px solid var(--teal);border-radius:20px;padding:4px 13px;margin-bottom:14px;}
+.hero h1{font-size:25px;line-height:1.4;color:var(--mustard-d);font-weight:900;margin:6px 0 4px;}
+.hero h1 .u{background:linear-gradient(transparent 62%, #F5DE9A 62%);padding:0 3px;}
+.hero .lead{font-size:14px;color:var(--ink);margin:12px 4px 0;}
+.hero .art{font-size:58px;margin:16px 0 8px;line-height:1;}
+.meta-row{display:flex;justify-content:center;gap:8px;margin:18px 0 6px;flex-wrap:wrap;}
+.chip{font-size:11px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px;color:var(--ink-soft);font-weight:700;}
+.chip b{color:var(--mustard-d);}
+
+.btn{display:block;width:100%;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:900;
+  font-family:inherit;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--mustard),var(--mustard-d));
+  box-shadow:var(--shadow);transition:transform .12s, box-shadow .12s;letter-spacing:.02em;margin-top:22px;}
+.btn:active{transform:translateY(2px);box-shadow:var(--shadow-sm);}
+.btn.teal{background:linear-gradient(135deg,var(--teal),var(--teal-d));}
+.btn.green{background:linear-gradient(135deg,var(--green-d),#7A9C24);}
+.btn.ghost{background:#fff;color:var(--mustard-d);border:1.5px solid var(--mustard);box-shadow:var(--shadow-sm);}
+.btn small{display:block;font-size:11px;font-weight:700;opacity:.92;margin-top:2px;letter-spacing:0;}
+.note{text-align:center;font-size:11px;color:var(--ink-soft);margin-top:12px;}
+
+/* ===== progress ===== */
+.pbar-wrap{margin:2px 2px 20px;}
+.pbar-top{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);font-weight:700;margin-bottom:6px;}
+.pbar{height:8px;background:var(--cream2);border-radius:20px;overflow:hidden;}
+.pbar>i{display:block;height:100%;width:0;border-radius:20px;
+  background:linear-gradient(90deg,var(--green),var(--mustard));transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+/* ===== question ===== */
+.qwrap{animation:fade .35s ease;}
+.q-no{font-size:12px;font-weight:900;color:var(--mustard-d);letter-spacing:.04em;}
+.q-ttl{font-size:20px;font-weight:900;color:var(--ink);line-height:1.45;margin:6px 0 20px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;
+  padding:15px 15px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;
+  font-family:inherit;transition:.14s;box-shadow:var(--shadow-sm);}
+.opt:active{transform:scale(.98);}
+.opt .em{font-size:23px;flex-shrink:0;}
+.opt.sel{border-color:var(--mustard);background:linear-gradient(135deg,#fff,var(--cream2));box-shadow:0 6px 18px rgba(214,133,43,.2);}
+
+/* ===== calc ===== */
+.calc{text-align:center;padding:60px 10px;}
+.calc .spin{width:70px;height:70px;margin:0 auto 22px;border-radius:50%;
+  border:6px solid var(--cream2);border-top-color:var(--mustard);animation:sp 1s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.calc .msg{font-size:16px;font-weight:900;color:var(--mustard-d);min-height:26px;}
+
+/* ===== result ===== */
+.rcard{background:#fff;border-radius:24px;padding:24px 20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;text-align:center;animation:pop .5s ease;}
+.rcard .rband{position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,var(--mustard),var(--green),var(--teal));}
+.rcard .rkick{font-size:11px;font-weight:700;color:var(--teal-d);letter-spacing:.1em;margin-top:6px;}
+.rcard .rface{font-size:64px;line-height:1;margin:10px 0 4px;}
+.rcard .rname{font-size:24px;font-weight:900;color:var(--mustard-d);line-height:1.35;}
+.rcard .rname .s{display:block;font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:4px;}
+.rcard .rdesc{font-size:14px;color:var(--ink);margin:14px 3px 4px;text-align:left;}
+.rmeter{margin:20px 4px 4px;text-align:left;}
+.rmeter .ml{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--ink-soft);margin:12px 0 5px;}
+.rmeter .ml b{color:var(--mustard-d);}
+.rmeter .mbar{height:9px;background:var(--cream2);border-radius:20px;overflow:hidden;}
+.rmeter .mbar>i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),var(--mustard));width:0;transition:width .9s ease;}
+
+.block{margin:16px 2px 0;text-align:left;background:linear-gradient(135deg,#fff,var(--cream));border:1.5px solid var(--line);border-radius:18px;padding:16px 16px;}
+.block h3{font-size:14px;font-weight:900;color:var(--mustard-d);margin:0 0 7px;display:flex;align-items:center;gap:7px;}
+.block h3 .ic{width:26px;height:26px;border-radius:9px;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.block p{font-size:13.5px;color:var(--ink);margin:0;}
+.block.teal{border-color:var(--teal);}
+.block.teal h3{color:var(--teal-d);}
+.block.teal h3 .ic{background:#E4F0F0;}
+
+/* ===== mini demo ===== */
+.demo-intro{text-align:center;padding:8px 4px 0;}
+.demo-intro h2{font-size:21px;font-weight:900;color:var(--mustard-d);margin:4px 0 6px;}
+.demo-intro p{font-size:13.5px;color:var(--ink);margin:0 4px;}
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0 6px;}
+.pick{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;
+  font-family:inherit;font-weight:700;font-size:13.5px;color:var(--ink);box-shadow:var(--shadow-sm);transition:.14s;}
+.pick:active{transform:scale(.97);}
+.pick.sel{border-color:var(--mustard);background:var(--cream2);}
+.pick .em{font-size:30px;display:block;margin-bottom:5px;}
+
+.gauge{background:#fff;border-radius:22px;padding:22px 18px;box-shadow:var(--shadow);text-align:center;margin-top:8px;animation:pop .5s ease;}
+.gauge .glabel{font-size:12px;color:var(--ink-soft);font-weight:700;}
+.gauge .gitem{font-size:16px;font-weight:900;color:var(--ink);margin:2px 0 14px;}
+.gauge .gprice{font-size:16px;font-weight:900;color:var(--teal-d);}
+.gauge .gprice .big{font-size:40px;color:var(--mustard-d);font-family:"Zen Maru Gothic";vertical-align:-3px;}
+.gauge .grange{position:relative;height:14px;background:linear-gradient(90deg,#EAF2D6,#F7E4B4,#F3D08A);border-radius:20px;margin:16px 6px 6px;}
+.gauge .grange .pin{position:absolute;top:-7px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--mustard-d);transform:translateX(-50%);transition:left 1s ease;}
+.gauge .gsub{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-soft);margin:2px 8px 0;font-weight:700;}
+.gauge .gnote{font-size:12px;color:var(--ink-soft);margin-top:14px;background:var(--cream);border-radius:12px;padding:9px 11px;}
+
+/* ===== CTA final ===== */
+.cta-card{background:linear-gradient(150deg,var(--teal),var(--teal-d));border-radius:24px;padding:26px 20px;color:#fff;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;animation:pop .5s ease;}
+.cta-card .cface{font-size:46px;line-height:1;margin-bottom:6px;}
+.cta-card h2{font-size:21px;font-weight:900;margin:2px 0 8px;line-height:1.4;}
+.cta-card p{font-size:13.5px;opacity:.96;margin:0 2px;}
+.cta-card .ul{background:linear-gradient(transparent 60%, rgba(255,255,255,.35) 60%);padding:0 3px;}
+.list{text-align:left;background:rgba(255,255,255,.16);border-radius:16px;padding:14px 16px;margin:18px 0 4px;}
+.list .li{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:700;margin:8px 0;}
+.list .li:first-child{margin-top:0;}
+.list .li .ck{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--teal-d);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+.stamp-row{display:flex;gap:9px;margin-top:16px;}
+.stampbtn{flex:1;background:#fff;border:none;border-radius:14px;padding:12px 6px;font-family:inherit;font-weight:700;font-size:12px;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-sm);transition:.14s;}
+.stampbtn:active{transform:scale(.96);}
+.stampbtn.on{background:var(--cream2);outline:2px solid var(--mustard);}
+.stampbtn .em{font-size:22px;display:block;margin-bottom:2px;}
+.mockbadge{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(74,68,56,.92);color:#fff;font-size:11px;text-align:center;padding:7px;font-weight:700;}
+.mockbadge b{color:var(--green);}
+.restart{text-align:center;margin-top:20px;}
+.restart a{font-size:12px;color:var(--ink-soft);text-decoration:underline;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">M</div>
+    <div class="tt"><div class="nm">おうち時間 収益化タイプ診断</div><div class="sub">Famm ママ向け・60秒・無料</div></div>
+    <div class="badge">全6問</div>
+  </div>
+
+  <!-- ===== INTRO ===== -->
+  <section class="view on" id="v-intro">
+    <div class="hero">
+      <span class="kicker">✿ ママのための60秒診断</span>
+      <div class="art">🏠✨</div>
+      <h1>あなたの<span class="u">おうち時間</span>、<br>いくらに変わる？</h1>
+      <p class="lead">「在宅で収入…気になるけど、私にできるかな」<br>その気持ちのままで大丈夫。<br>6つの質問に答えるだけで、<b>あなたの"稼ぎ方タイプ"</b>と<br>いちばん近道の一歩がわかります☺️</p>
+    </div>
+    <div class="meta-row">
+      <span class="chip">⏱ <b>約60秒</b></span>
+      <span class="chip">✏️ <b>タップで回答</b></span>
+      <span class="chip">🎁 <b>ミニ体験つき</b></span>
+    </div>
+    <button class="btn" onclick="start()">診断をはじめる<small>▶ タップして最初の質問へ</small></button>
+    <p class="note">※ 登録・入力不要。結果はこの画面だけで見られます</p>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="view" id="v-quiz">
+    <div class="pbar-wrap">
+      <div class="pbar-top"><span id="q-count">質問 1 / 6</span><span id="q-pct">17%</span></div>
+      <div class="pbar"><i id="q-fill"></i></div>
+    </div>
+    <div id="q-slot"></div>
+  </section>
+
+  <!-- ===== CALC ===== -->
+  <section class="view" id="v-calc">
+    <div class="calc">
+      <div class="spin"></div>
+      <div class="msg" id="calc-msg">あなたのタイプを見ています…</div>
+    </div>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section class="view" id="v-result">
+    <div class="rcard">
+      <div class="rband"></div>
+      <div class="rkick">あなたのタイプは…</div>
+      <div class="rface" id="r-face">🌱</div>
+      <div class="rname" id="r-name">—<span class="s" id="r-sub">—</span></div>
+      <p class="rdesc" id="r-desc">—</p>
+      <div class="rmeter">
+        <div class="ml"><span>すぐ動ける度</span><b id="m1v">—</b></div><div class="mbar"><i id="m1"></i></div>
+        <div class="ml"><span>おうちの"売れる資産"度</span><b id="m2v">—</b></div><div class="mbar"><i id="m2"></i></div>
+        <div class="ml"><span>あと少しで伸びる度</span><b id="m3v">—</b></div><div class="mbar"><i id="m3"></i></div>
+      </div>
+    </div>
+    <div class="block">
+      <h3><span class="ic">💪</span>あなたの強み</h3>
+      <p id="r-strength">—</p>
+    </div>
+    <div class="block teal">
+      <h3><span class="ic">🔑</span>いちばんの"あと一歩"</h3>
+      <p id="r-wall">—</p>
+    </div>
+    <button class="btn teal" onclick="toDemo()">じゃあ実際に、おうちの物を"お金"に変えてみる<small>▶ 30秒のミニ体験へ</small></button>
+    <div class="restart"><a onclick="restart()">もう一度診断する</a></div>
+  </section>
+
+  <!-- ===== DEMO ===== -->
+  <section class="view" id="v-demo">
+    <div class="demo-intro">
+      <h2>おうちの物、ためしに1つ🏷</h2>
+      <p>いちばん家にありそうな物をタップしてみてください。<br>今のフリマ相場をサッと出します（体験版）</p>
+    </div>
+    <div class="picker" id="picker"></div>
+    <div id="gauge-slot"></div>
+    <button class="btn" id="demo-next" style="display:none" onclick="toCTA()">この続き…AIにぜんぶ任せる方法を見る<small>▶ あなた専用の一歩へ</small></button>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="view" id="v-cta">
+    <div class="cta-card">
+      <div class="cface">🎀</div>
+      <h2 id="cta-h">あなたにいちばん近い一歩は<br><span class="ul" id="cta-seg">「値付けの壁」を外すこと</span></h2>
+      <p id="cta-p">今日みたいに"1つの物"を、AIが値付け→出品文まで自動でつくる。それを実際に触ってもらう場を、無料で用意しました☺️</p>
+      <div class="list">
+        <div class="li"><span class="ck">1</span><span>今日の診断タイプ別に「あなたの一歩」を解説</span></div>
+        <div class="li"><span class="ck">2</span><span>おうちの物をAIが値付け→出品文まで自動作成を体験</span></div>
+        <div class="li"><span class="ck">3</span><span>「まず月+3万」までの続け方を、その場で持ち帰り</span></div>
+      </div>
+      <button class="btn green" style="margin-top:18px" onclick="alert('※モックアップです。ここに勉強会予約LINE/フォームが入ります');">無料の勉強会で実際に触ってみる<small>▶ 所要90分・スマホ1台でOK</small></button>
+    </div>
+    <div class="block" style="margin-top:18px">
+      <h3><span class="ic">💬</span>最後に、今の気持ちに近いスタンプを1つ</h3>
+      <p style="font-size:12.5px;color:var(--ink-soft)">押すだけでOK。あなたの本音、そっと受け取ります☺️</p>
+      <div class="stamp-row">
+        <button class="stampbtn" onclick="stamp(this)"><span class="em">😊</span>やってみたい</button>
+        <button class="stampbtn" onclick="stamp(this)"><span class="em">🤔</span>まだ不安</button>
+        <button class="stampbtn" onclick="stamp(this)"><span class="em">👀</span>気になってた</button>
+      </div>
+    </div>
+    <div class="restart"><a onclick="restart()">もう一度診断する</a></div>
+  </section>
+</div>
+<div class="mockbadge">これは <b>提案用モックアップ</b> です／実データ・予約導線は本番接続で差し込みます</div>
+
+<script>
+/* ===================== 診断ロジック ===================== */
+var QUESTIONS = [
+  { no:1, q:"おうちに、着てない服・使ってない物ってどれくらいありますか？",
+    opts:[
+      {t:"クローゼットや押し入れにたくさん…😅", em:"📦", a:{asset:2,act:0}},
+      {t:"そこそこある（見返せば出てくる）", em:"👕", a:{asset:1,act:0}},
+      {t:"あまりない・厳選してるほう", em:"✨", a:{asset:0,act:0}},
+    ]},
+  { no:2, q:"メルカリなどのフリマ、やったことありますか？",
+    opts:[
+      {t:"売れた経験がある", em:"🙆‍♀️", a:{asset:1,act:2}},
+      {t:"出したけど、売れずに止まってる", em:"😓", a:{asset:1,act:1}},
+      {t:"登録だけ・見てるだけ", em:"👀", a:{asset:0,act:1}},
+      {t:"やったことない", em:"🔰", a:{asset:0,act:0}},
+    ]},
+  { no:3, q:"「これ売れるかな？」と思った時、どうすることが多い？",
+    opts:[
+      {t:"とりあえず出してみる", em:"🏃‍♀️", a:{act:2}},
+      {t:"相場を調べて…そのうち止まる", em:"🔍", a:{act:1}},
+      {t:"考えるだけで、そのまま", em:"💭", a:{act:0}},
+    ]},
+  { no:4, q:"在宅で収入、いま一番の“ひっかかり“はどれ？",
+    opts:[
+      {t:"時間が取れるか不安", em:"⏰", a:{act:1}},
+      {t:"やり方・自信がない", em:"🥺", a:{act:0}},
+      {t:"何を売ればいいか分からない", em:"❓", a:{asset:0}},
+      {t:"売る物はある。あとは売り方！", em:"💡", a:{asset:2,act:1}},
+    ]},
+  { no:5, q:"月にあと“いくら“あったら、気持ちが軽くなりそう？",
+    opts:[
+      {t:"まず +3万円", em:"🌱", a:{}},
+      {t:"できれば +5万円", em:"🌿", a:{}},
+      {t:"+10万円いけたら…！", em:"🌳", a:{}},
+      {t:"想像がつかない", em:"☁️", a:{}},
+    ], key:"goal"},
+  { no:6, q:"今の気持ちに、いちばん近いのは？",
+    opts:[
+      {t:"まず一歩、踏み出したい", em:"🚪", a:{act:1}},
+      {t:"売れるコツを知りたい", em:"📖", a:{asset:1}},
+      {t:"続けられる仕組みが欲しい", em:"🔁", a:{act:1}},
+      {t:"自分にできるか、まだ不安", em:"💗", a:{act:0}},
+    ], key:"mood"},
+];
+
+var TYPES = {
+  meishi:{ face:"🧭", name:"あと一歩の出品迷子さん",
+    sub:"やる気もモノもある。止まってるのは“値付け“だけ",
+    desc:"あなたは在宅収入に一番近いところに立っています。売る物もあるし、動く気持ちもある。でも「いくらで出す？」「なんて説明する？」で手が止まりがち。そこさえ外れれば、家の中がそのまま“お財布“に変わります。",
+    strength:"「やってみよう」と思える行動力と、家に眠る“売れる資産“の両方を持っています。あとは正しい値付けを知るだけ。",
+    wall:"いちばんの壁は<b>「値付けと出品文」</b>。ここでほとんどの人が止まります。逆に言うと、ここを外せば一気に進みます。",
+    seg:"「値付けの壁」を外すこと", m:[85,80,90] },
+  mekiki:{ face:"💎", name:"眠れる目利きさん",
+    sub:"モノを見る目はある。あとは“最初の1品“だけ",
+    desc:"あなたは物の良さや価値が分かるタイプ。家にもちゃんと“売れる物“が眠っています。ただ、忙しさや「後でいいや」で行動が後回しに。最初の1品さえ出せれば、あなたの目利きはお金に変わります。",
+    strength:"物の価値を見極める“目“と、家にある資産。これは後から身につけにくい、あなたの財産です。",
+    wall:"いちばんの壁は<b>「最初の1品を出すハードル」</b>。完璧を目指さず、1品出す流れを一度知るだけで変わります。",
+    seg:"「最初の1品」を出す流れをつかむこと", m:[55,85,80] },
+  tokei:{ face:"🌤", name:"これから伸びる準備っ子さん",
+    sub:"気持ちは前向き。あとは“やり方“を1本だけ",
+    desc:"あなたは「まず一歩踏み出したい」と前を向いている状態。まだ売る物や自信は手探りでも、その素直さがいちばん伸びます。難しいことは要りません。売れる物の見つけ方から、順番に。",
+    strength:"変な自己流がついていないぶん、正しいやり方がスッと入ります。前を向く気持ちが最大の武器です。",
+    wall:"いちばんの壁は<b>「何を売ればいいか分からない」</b>。売れる物の“見つけ方“を1本知れば、その日から動けます。",
+    seg:"「売れる物の見つけ方」を1本つかむこと", m:[70,45,85] },
+  fuan:{ face:"🌷", name:"やさしい石橋さん",
+    sub:"慎重なだけ。背中を“少し“押せば動ける",
+    desc:"あなたは「自分にできるかな」と丁寧に考えるタイプ。それは弱みではなく、失敗しにくい強みです。今は不安が先に立っているだけ。小さな成功を1回体験すれば、その慎重さが“堅実に稼ぐ力“に変わります。",
+    strength:"リスクをちゃんと考えられる慎重さ。勢いで失敗しない、長く続けられるタイプです。",
+    wall:"いちばんの壁は<b>「できるか不安」という気持ち」</b>。1品でも“売れた“を体験すれば、不安は自信に変わります。",
+    seg:"小さな「できた」を1回、体験すること", m:[45,55,80] },
+};
+
+var state = { i:0, asset:0, act:0, goal:null, mood:null, picked:null };
+
+function show(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+}
+function start(){ state={i:0,asset:0,act:0,goal:null,mood:null,picked:null}; show('v-quiz'); renderQ(); }
+function restart(){ show('v-intro'); }
+
+function renderQ(){
+  var q = QUESTIONS[state.i];
+  document.getElementById('q-count').textContent = '質問 '+q.no+' / 6';
+  var pct = Math.round(q.no/6*100);
+  document.getElementById('q-pct').textContent = pct+'%';
+  document.getElementById('q-fill').style.width = pct+'%';
+  var html = '<div class="qwrap"><div class="q-no">Q'+q.no+'</div><div class="q-ttl">'+q.q+'</div><div class="opts">';
+  q.opts.forEach(function(o,idx){
+    html += '<button class="opt" onclick="pick('+idx+')"><span class="em">'+o.em+'</span><span>'+o.t+'</span></button>';
+  });
+  html += '</div></div>';
+  document.getElementById('q-slot').innerHTML = html;
+}
+function pick(idx){
+  var q = QUESTIONS[state.i], o = q.opts[idx], a = o.a||{};
+  if(a.asset) state.asset += a.asset;
+  if(a.act)   state.act   += a.act;
+  if(q.key==='goal') state.goal = idx;
+  if(q.key==='mood') state.mood = idx;
+  var btns = document.querySelectorAll('#q-slot .opt');
+  btns[idx].classList.add('sel');
+  setTimeout(function(){
+    state.i++;
+    if(state.i < QUESTIONS.length){ renderQ(); }
+    else runCalc();
+  }, 260);
+}
+
+function runCalc(){
+  show('v-calc');
+  var msgs = ['あなたのタイプを見ています…','おうちの“売れる資産“を計算中…','いちばんの近道を探しています…'];
+  var mi=0; var el=document.getElementById('calc-msg');
+  el.textContent = msgs[0];
+  var t = setInterval(function(){ mi++; if(mi<msgs.length) el.textContent=msgs[mi]; },620);
+  setTimeout(function(){ clearInterval(t); showResult(); }, 2000);
+}
+
+function decideType(){
+  var asset=state.asset, act=state.act;
+  // act高×asset高 = 迷子 / act低×asset高 = 目利き / act高×asset低 = これから / act低×asset低 = 不安
+  var hiAct = act>=3, hiAsset = asset>=3;
+  if(hiAct && hiAsset) return 'meishi';
+  if(!hiAct && hiAsset) return 'mekiki';
+  if(hiAct && !hiAsset) return 'tokei';
+  return 'fuan';
+}
+function showResult(){
+  var key = decideType(), t = TYPES[key];
+  state.typeKey = key;
+  document.getElementById('r-face').textContent = t.face;
+  document.getElementById('r-name').innerHTML = t.name + '<span class="s">'+t.sub+'</span>';
+  document.getElementById('r-desc').innerHTML = t.desc;
+  document.getElementById('r-strength').innerHTML = t.strength;
+  document.getElementById('r-wall').innerHTML = t.wall;
+  document.getElementById('cta-seg').textContent = t.seg;
+  var labels=['たっぷり','しっかり','あと少し'];
+  ['m1','m2','m3'].forEach(function(id,ix){
+    var v=t.m[ix];
+    document.getElementById(id+'v').textContent = (v>=80?'たっぷり':v>=60?'しっかり':'これから')+' '+v;
+  });
+  show('v-result');
+  setTimeout(function(){
+    document.getElementById('m1').style.width=t.m[0]+'%';
+    document.getElementById('m2').style.width=t.m[1]+'%';
+    document.getElementById('m3').style.width=t.m[2]+'%';
+  },200);
+}
+
+/* ===================== ミニ体験（値付け相場） ===================== */
+var ITEMS = [
+  {k:'tops', em:'👚', name:'着なくなった服・トップス', lo:800, mid:1600, hi:3500, note:'ブランドや状態で上下します。人気ブランドなら+αも。'},
+  {k:'bag',  em:'👜', name:'使ってないバッグ', lo:1500, mid:4200, hi:12000, note:'ハイブランドは万単位に。ノーブランドでも需要あり。'},
+  {k:'baby', em:'🧸', name:'サイズアウトした子ども服・ベビー用品', lo:600, mid:1400, hi:3200, note:'まとめ売り・季節前出品で伸びやすいジャンル。'},
+  {k:'kaden',em:'🎧', name:'使わない家電・ガジェット', lo:1200, mid:3800, hi:9000, note:'付属品そろい・型番明記で相場の上限に近づきます。'},
+];
+function renderPicker(){
+  var html='';
+  ITEMS.forEach(function(it,ix){
+    html += '<button class="pick" onclick="pickItem('+ix+')"><span class="em">'+it.em+'</span>'+it.name+'</button>';
+  });
+  document.getElementById('picker').innerHTML = html;
+}
+function pickItem(ix){
+  var it = ITEMS[ix]; state.picked=ix;
+  document.querySelectorAll('#picker .pick').forEach(function(p,i){ p.classList.toggle('sel', i===ix); });
+  var pinPct = 58; // midの位置イメージ
+  var html = '<div class="gauge">'
+    + '<div class="glabel">'+it.em+' あなたのこの1品、いまの相場は…</div>'
+    + '<div class="gitem">'+it.name+'</div>'
+    + '<div class="gprice"><span class="big">¥'+it.mid.toLocaleString()+'</span> 前後</div>'
+    + '<div class="grange"><span class="pin" style="left:0%"></span></div>'
+    + '<div class="gsub"><span>¥'+it.lo.toLocaleString()+'</span><span>相場のまん中</span><span>¥'+it.hi.toLocaleString()+'〜</span></div>'
+    + '<div class="gnote">💡 '+it.note+'<br><b>この“いくらで出す？“を、勉強会ではAIが自動で出します。</b></div>'
+    + '</div>';
+  document.getElementById('gauge-slot').innerHTML = html;
+  setTimeout(function(){ var pin=document.querySelector('.grange .pin'); if(pin) pin.style.left=pinPct+'%'; },120);
+  document.getElementById('demo-next').style.display='block';
+  document.getElementById('demo-next').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function toDemo(){ show('v-demo'); renderPicker(); document.getElementById('demo-next').style.display='none'; document.getElementById('gauge-slot').innerHTML=''; }
+function toCTA(){ show('v-cta'); }
+function stamp(el){ document.querySelectorAll('.stamp-row .stampbtn').forEach(function(b){b.classList.remove('on');}); el.classList.add('on'); }
+</script>
+</body>
+</html>
