@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-<title>お金の"次のステージ"診断｜3銀行1証券のその先へ</title>
+<title>投資フェーズ到達診断｜あと月いくらで、投資フェーズ？</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
@@ -14,9 +14,8 @@
   --navy:#2A3F63; --navy-d:#1E2E49; --navy-soft:#54709B;
   --blue:#EAF1F9; --blue2:#DCE8F5; --sky:#7FA8D6; --sky-d:#5E86B8;
   --pink:#D98BA3; --pink-d:#C56E8A; --pink-soft:#F1C6D5; --pink-bg:#FBEEF3;
-  --cream:#FFFFFF; --cream2:#EAF1F9; --paper:#FFFFFF; --white:#fff;
+  --paper:#FFFFFF; --white:#fff;
   --ink:#3C4353; --ink-soft:#8C93A3; --line:#E1E9F3;
-  --ok:#5FA37E; --warn:#D6A04C;
   --shadow:0 12px 30px rgba(42,63,99,.13);
   --shadow-sm:0 5px 16px rgba(42,63,99,.09);
 }
@@ -33,7 +32,7 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:9px;}
 .topbar .logo{width:32px;height:32px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--navy),var(--navy-soft));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;box-shadow:0 3px 8px rgba(42,63,99,.28);}
 .topbar .tt{flex:1;min-width:0;}
-.topbar .tt .nm{font-weight:900;font-size:13.5px;color:var(--navy);}
+.topbar .tt .nm{font-weight:900;font-size:13px;color:var(--navy);}
 .topbar .tt .sub{font-size:10px;color:var(--ink-soft);}
 .topbar .badge{font-size:9.5px;background:var(--blue);color:var(--navy);padding:3px 9px;border-radius:20px;font-weight:700;}
 
@@ -42,23 +41,30 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 @keyframes pop{0%{transform:scale(.92);opacity:0;}100%{transform:scale(1);opacity:1;}}
 @keyframes sp{to{transform:rotate(360deg);}}
+@keyframes count{from{opacity:.3;}to{opacity:1;}}
+
+/* seminar date banner */
+.datebar{background:linear-gradient(135deg,var(--navy),var(--navy-d));color:#fff;border-radius:16px;padding:14px 16px;margin:2px 2px 4px;text-align:center;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.datebar .dk{font-size:10.5px;letter-spacing:.12em;color:var(--pink-soft);font-weight:700;}
+.datebar .dd{font-size:19px;font-weight:900;margin:3px 0 1px;}
+.datebar .dt{font-size:12px;opacity:.92;}
+.datebar .pre{display:inline-block;margin-top:8px;font-size:11px;background:rgba(255,255,255,.16);border-radius:20px;padding:4px 12px;font-weight:700;}
 
 .hero{text-align:center;padding:14px 6px 6px;}
-.hero .kicker{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--sky);border-radius:20px;padding:4px 13px;margin-bottom:14px;}
-.hero .art{font-size:56px;margin:14px 0 8px;line-height:1;}
+.hero .kicker{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--sky);border-radius:20px;padding:4px 13px;margin-bottom:12px;}
+.hero .art{font-size:52px;margin:8px 0 6px;line-height:1;}
 .hero h1{font-size:24px;line-height:1.45;color:var(--navy);font-weight:900;margin:6px 0 4px;}
-.hero h1 .u{background:linear-gradient(transparent 62%, var(--pink-soft) 62%);padding:0 3px;}
-.hero .lead{font-size:14px;color:var(--ink);margin:12px 4px 0;}
-.filter{font-size:11.5px;color:var(--navy);background:var(--blue);border:1px solid var(--blue2);border-radius:12px;padding:9px 12px;margin:16px 2px 0;font-weight:700;}
-.meta-row{display:flex;justify-content:center;gap:8px;margin:18px 0 6px;flex-wrap:wrap;}
+.hero h1 .u{background:linear-gradient(transparent 60%, var(--pink-soft) 60%);padding:0 3px;}
+.hero .lead{font-size:14px;color:var(--ink);margin:12px 4px 0;text-align:left;}
+.hero .lead b{color:var(--navy);}
+.filter{font-size:11.5px;color:var(--navy);background:var(--blue);border:1px solid var(--blue2);border-radius:12px;padding:9px 12px;margin:14px 2px 0;font-weight:700;}
+.meta-row{display:flex;justify-content:center;gap:8px;margin:16px 0 6px;flex-wrap:wrap;}
 .chip{font-size:11px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px;color:var(--ink-soft);font-weight:700;}
 .chip b{color:var(--pink-d);}
 
-.btn{display:block;width:100%;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:900;font-family:inherit;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--pink),var(--pink-d));box-shadow:var(--shadow);transition:transform .12s,box-shadow .12s;letter-spacing:.02em;margin-top:22px;}
+.btn{display:block;width:100%;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:900;font-family:inherit;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--pink),var(--pink-d));box-shadow:var(--shadow);transition:transform .12s,box-shadow .12s;letter-spacing:.02em;margin-top:20px;}
 .btn:active{transform:translateY(2px);box-shadow:var(--shadow-sm);}
-.btn.teal,.btn.forest{background:linear-gradient(135deg,var(--navy-soft),var(--navy));}
-.btn.green{background:linear-gradient(135deg,var(--pink),var(--pink-d));}
-.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy-soft);box-shadow:var(--shadow-sm);}
+.btn.navy{background:linear-gradient(135deg,var(--navy-soft),var(--navy));}
 .btn small{display:block;font-size:11px;font-weight:700;opacity:.92;margin-top:2px;letter-spacing:0;}
 .note{text-align:center;font-size:11px;color:var(--ink-soft);margin-top:12px;}
 
@@ -69,9 +75,9 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 
 .qwrap{animation:fade .35s ease;}
 .q-no{font-size:12px;font-weight:900;color:var(--pink-d);letter-spacing:.04em;}
-.q-ttl{font-size:19px;font-weight:900;color:var(--navy);line-height:1.5;margin:6px 0 20px;}
+.q-ttl{font-size:20px;font-weight:900;color:var(--navy);line-height:1.5;margin:6px 0 20px;}
 .opts{display:flex;flex-direction:column;gap:11px;}
-.opt{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:15px;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:inherit;transition:.14s;box-shadow:var(--shadow-sm);}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:inherit;transition:.14s;box-shadow:var(--shadow-sm);}
 .opt:active{transform:scale(.98);}
 .opt .em{font-size:22px;flex-shrink:0;}
 .opt.sel{border-color:var(--pink);background:linear-gradient(135deg,#fff,var(--blue));box-shadow:0 6px 18px rgba(42,63,99,.18);}
@@ -80,97 +86,95 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 .calc .spin{width:70px;height:70px;margin:0 auto 22px;border-radius:50%;border:6px solid var(--blue2);border-top-color:var(--pink);animation:sp 1s linear infinite;}
 .calc .msg{font-size:16px;font-weight:900;color:var(--navy);min-height:26px;}
 
+/* result */
 .rcard{background:var(--paper);border-radius:22px;padding:24px 20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;text-align:center;animation:pop .5s ease;}
 .rcard .rband{position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,var(--navy),var(--sky),var(--pink));}
-.rcard .rkick{font-size:11px;font-weight:700;color:var(--navy-soft);letter-spacing:.1em;margin-top:6px;}
-.rcard .rface{font-size:62px;line-height:1;margin:10px 0 4px;}
-.rcard .rname{font-size:23px;font-weight:900;color:var(--navy);line-height:1.35;}
-.rcard .rname .s{display:block;font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:4px;}
-.rcard .rdesc{font-size:14px;color:var(--ink);margin:14px 3px 4px;text-align:left;}
-.rmeter{margin:20px 4px 4px;text-align:left;}
-.rmeter .ml{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--ink-soft);margin:12px 0 5px;}
-.rmeter .ml b{color:var(--pink-d);}
-.rmeter .mbar{height:9px;background:var(--blue2);border-radius:20px;overflow:hidden;}
-.rmeter .mbar>i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--sky),var(--pink));width:0;transition:width .9s ease;}
+.rcard .rkick{font-size:12px;font-weight:700;color:var(--navy-soft);letter-spacing:.06em;margin-top:8px;}
+.bignum{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--pink-d);line-height:1;margin:8px 0 2px;animation:count .8s ease;}
+.bignum .pre{font-size:20px;color:var(--navy);vertical-align:6px;}
+.bignum .n{font-size:66px;}
+.bignum .man{font-size:24px;color:var(--navy);}
+.rcard .rlab{font-size:14px;font-weight:900;color:var(--navy);}
+.rcard .rsub{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+
+.gapbar{margin:20px 4px 4px;text-align:left;}
+.gapbar .gl{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+.gapbar .track{position:relative;height:34px;background:var(--blue2);border-radius:12px;overflow:hidden;}
+.gapbar .cur{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--sky-d),var(--sky));border-radius:12px 0 0 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:900;width:0;transition:width 1s ease;}
+.gapbar .gap{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,var(--pink),var(--pink) 8px,var(--pink-d) 8px,var(--pink-d) 16px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:900;width:0;left:0;transition:width 1s ease .3s;opacity:0;}
+.gapbar .cap{font-size:11px;color:var(--ink-soft);margin-top:6px;text-align:center;}
 
 .block{margin:16px 2px 0;text-align:left;background:linear-gradient(135deg,#fff,var(--blue));border:1.5px solid var(--line);border-radius:16px;padding:16px;}
 .block h3{font-size:14px;font-weight:900;color:var(--navy);margin:0 0 7px;display:flex;align-items:center;gap:7px;}
 .block h3 .ic{width:26px;height:26px;border-radius:9px;background:var(--blue2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
 .block p{font-size:13.5px;color:var(--ink);margin:0;}
-.block.teal,.block.forest{border-color:var(--pink-soft);}
-.block.teal h3,.block.forest h3{color:var(--pink-d);}
-.block.teal h3 .ic,.block.forest h3 .ic{background:var(--pink-bg);}
+.block.pink{border-color:var(--pink-soft);}
+.block.pink h3{color:var(--pink-d);}
+.block.pink h3 .ic{background:var(--pink-bg);}
 
-.demo-intro{text-align:center;padding:8px 4px 0;}
-.demo-intro h2{font-size:20px;font-weight:900;color:var(--navy);margin:4px 0 6px;}
-.demo-intro p{font-size:13.5px;color:var(--ink);margin:0 4px;}
-.picker{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0 6px;}
-.pick{background:#fff;border:2px solid var(--line);border-radius:15px;padding:16px 8px;text-align:center;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink);box-shadow:var(--shadow-sm);transition:.14s;}
-.pick:active{transform:scale(.97);}
-.pick.sel{border-color:var(--pink);background:var(--blue);}
-.pick .em{font-size:28px;display:block;margin-bottom:5px;}
+/* locked preview list (seminar content) */
+.prep{margin:16px 2px 0;background:var(--navy);border-radius:18px;padding:18px 16px;color:#fff;position:relative;overflow:hidden;}
+.prep .ph{font-size:13px;font-weight:900;margin:0 0 10px;display:flex;align-items:center;gap:7px;line-height:1.5;}
+.prep .pi{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14);}
+.prep .pi:last-child{border-bottom:none;}
+.prep .pi .no{width:24px;height:24px;border-radius:8px;background:rgba(217,139,163,.95);color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.prep .pi .tx{flex:1;font-size:13px;font-weight:700;}
+.prep .pi .lock{font-size:14px;opacity:.75;}
+.prep .pn{font-size:11.5px;opacity:.92;margin-top:11px;background:rgba(255,255,255,.12);border-radius:10px;padding:8px 11px;}
 
-.gauge{background:var(--paper);border-radius:20px;padding:22px 18px;box-shadow:var(--shadow);text-align:center;margin-top:8px;animation:pop .5s ease;}
-.gauge .glabel{font-size:12px;color:var(--ink-soft);font-weight:700;}
-.gauge .gitem{font-size:15px;font-weight:900;color:var(--navy);margin:2px 0 12px;}
-.gauge .gprice{font-size:15px;font-weight:900;color:var(--navy-soft);}
-.gauge .gprice .big{font-size:38px;color:var(--pink-d);font-family:"Noto Serif JP",serif;vertical-align:-3px;}
-.gauge .grange{position:relative;height:14px;background:linear-gradient(90deg,#DCE8F5,#EAF1F9,var(--pink-soft));border-radius:20px;margin:16px 6px 6px;}
-.gauge .grange .pin{position:absolute;top:-7px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--pink-d);transform:translateX(-50%);transition:left 1s ease;}
-.gauge .gsub{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-soft);margin:2px 8px 0;font-weight:700;}
-.gauge .gnote{font-size:12px;color:var(--ink-soft);margin-top:14px;background:var(--blue);border-radius:12px;padding:9px 11px;}
+.cta-card{background:linear-gradient(150deg,var(--pink),var(--pink-d));border-radius:20px;padding:24px 20px;color:#fff;text-align:center;box-shadow:var(--shadow);margin-top:16px;animation:pop .5s ease;}
+.cta-card .cd{font-size:11px;letter-spacing:.08em;font-weight:700;opacity:.97;background:rgba(255,255,255,.16);display:inline-block;border-radius:20px;padding:4px 12px;}
+.cta-card h2{font-size:19px;font-weight:900;margin:9px 0 8px;line-height:1.45;}
+.cta-card p{font-size:13px;opacity:.97;margin:0 2px;}
+.cta-card .btn{background:#fff;color:var(--pink-d);margin-top:16px;}
+.cta-card .seat{font-size:11px;opacity:.95;margin-top:10px;}
 
-.cta-card{background:linear-gradient(150deg,var(--navy),var(--navy-d));border-radius:22px;padding:26px 20px;color:#fff;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;animation:pop .5s ease;}
-.cta-card .cface{font-size:44px;line-height:1;margin-bottom:6px;}
-.cta-card h2{font-size:20px;font-weight:900;margin:2px 0 8px;line-height:1.45;}
-.cta-card p{font-size:13.5px;opacity:.96;margin:0 2px;}
-.cta-card .ul{background:linear-gradient(transparent 60%, rgba(217,139,163,.55) 60%);padding:0 3px;}
-.list{text-align:left;background:rgba(255,255,255,.14);border-radius:15px;padding:14px 16px;margin:18px 0 4px;}
-.list .li{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:700;margin:8px 0;}
-.list .li:first-child{margin-top:0;}
-.list .li .ck{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
 .stamp-row{display:flex;gap:9px;margin-top:14px;}
 .stampbtn{flex:1;background:#fff;border:none;border-radius:13px;padding:12px 6px;font-family:inherit;font-weight:700;font-size:12px;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-sm);transition:.14s;}
 .stampbtn:active{transform:scale(.96);}
 .stampbtn.on{background:var(--blue);outline:2px solid var(--pink);}
 .stampbtn .em{font-size:21px;display:block;margin-bottom:2px;}
+.restart{text-align:center;margin-top:18px;}
+.restart a{font-size:12px;color:var(--ink-soft);text-decoration:underline;cursor:pointer;}
 .mockbadge{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(30,46,73,.93);color:#fff;font-size:11px;text-align:center;padding:7px;font-weight:700;}
 .mockbadge b{color:var(--pink-soft);}
-.restart{text-align:center;margin-top:20px;}
-.restart a{font-size:12px;color:var(--ink-soft);text-decoration:underline;cursor:pointer;}
-
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
     <div class="logo">A</div>
-    <div class="tt"><div class="nm">お金の"次のステージ"診断</div><div class="sub">卒業生向け・60秒・3銀行1証券のその先へ</div></div>
-    <div class="badge">全6問</div>
+    <div class="tt"><div class="nm">投資フェーズ到達診断</div><div class="sub">卒業生向け・60秒・あと月いくらで投資フェーズ？</div></div>
+    <div class="badge">全3問</div>
   </div>
 
   <!-- INTRO -->
   <section class="view on" id="v-intro">
+    <div class="datebar">
+      <div class="dk">◆ この勉強会に先駆けて、診断をプレゼント</div>
+      <div class="dd" id="sem-date">◯月◯日(◯)</div>
+      <div class="dt"><span id="sem-name">投資フェーズ勉強会</span> ／ <span id="sem-time">夜21:00〜</span></div>
+      <span class="pre">▶ まず診断で「自分の数字」を知ってから当日へ</span>
+    </div>
     <div class="hero">
       <span class="kicker">◆ 卒業生のための60秒診断</span>
-      <div class="art">🧭</div>
-      <h1>あなたのお金は今、<br><span class="u">どのステージ</span>にいる？</h1>
-      <p class="lead">「3銀行1証券」までは進んだ。<br>じゃあ<b>"その先"</b>——投資フェーズへは、あと何が必要？<br>6つの質問で、あなたのフェーズと<br>次の一歩がはっきりします。</p>
-      <div class="filter">この診断は<b>ABCashで基礎を学んだ方向け</b>です。「これから前に進めたい」方にいちばん役立ちます。</div>
+      <div class="art">📈</div>
+      <h1>あと<span class="u">月いくら</span>で、<br>あなたは投資フェーズ？</h1>
+      <p class="lead">NISAも、つみたても、始めた。<br>でも——<b>「投資に回すお金が、思うように作れない」</b>。<br>そこが本当の壁ですよね。<br><br>この診断は、<b>あなたが投資フェーズに立つまで“あと月いくら”必要か</b>を、具体的な数字で出します。3問・60秒・登録なし。</p>
+      <div class="filter">この診断は<b>「もっと投資に回したいのに、入金力が足りない」</b>と感じている卒業生の方に、いちばん役立ちます。</div>
     </div>
     <div class="meta-row">
-      <span class="chip">⏱ <b>約60秒</b></span>
-      <span class="chip">✏️ <b>タップで回答</b></span>
-      <span class="chip">📊 <b>余力の見える化つき</b></span>
+      <span class="chip">⏱ <b>約60秒・3問</b></span>
+      <span class="chip">🔢 <b>自分の数字が出る</b></span>
     </div>
-    <button class="btn" onclick="start()">診断をはじめる<small>▶ タップして最初の質問へ</small></button>
-    <p class="note">※ 登録・入力不要。結果はこの画面だけで見られます</p>
+    <button class="btn" onclick="start()">自分の“あと月いくら”を出す<small>▶ タップして最初の質問へ</small></button>
+    <p class="note">※ 入力・登録なし。結果はこの画面だけで見られます</p>
   </section>
 
   <!-- QUIZ -->
   <section class="view" id="v-quiz">
     <div class="pbar-wrap">
-      <div class="pbar-top"><span id="q-count">質問 1 / 6</span><span id="q-pct">17%</span></div>
+      <div class="pbar-top"><span id="q-count">質問 1 / 3</span><span id="q-pct">33%</span></div>
       <div class="pbar"><i id="q-fill"></i></div>
     </div>
     <div id="q-slot"></div>
@@ -178,222 +182,166 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 
   <!-- CALC -->
   <section class="view" id="v-calc">
-    <div class="calc"><div class="spin"></div><div class="msg" id="calc-msg">あなたのフェーズを見ています…</div></div>
+    <div class="calc"><div class="spin"></div><div class="msg" id="calc-msg">あなたの“あと月いくら”を計算中…</div></div>
   </section>
 
   <!-- RESULT -->
   <section class="view" id="v-result">
     <div class="rcard">
       <div class="rband"></div>
-      <div class="rkick">あなたのフェーズは…</div>
-      <div class="rface" id="r-face">🧭</div>
-      <div class="rname" id="r-name">—<span class="s" id="r-sub">—</span></div>
-      <p class="rdesc" id="r-desc">—</p>
-      <div class="rmeter">
-        <div class="ml"><span>守りの土台づくり度</span><b id="m1v">—</b></div><div class="mbar"><i id="m1"></i></div>
-        <div class="ml"><span>お金の"見える化"度</span><b id="m2v">—</b></div><div class="mbar"><i id="m2"></i></div>
-        <div class="ml"><span>次のフェーズへの助走度</span><b id="m3v">—</b></div><div class="mbar"><i id="m3"></i></div>
+      <div class="rkick">あなたが投資フェーズに立つまで…</div>
+      <div class="bignum"><span class="pre">あと月 +</span><span class="n" id="r-gap">4</span><span class="man">万円</span></div>
+      <div class="rlab">の“入金力”を作れれば、届きます。</div>
+      <div class="rsub" id="r-sub">— 今の入金額から、目標までの差です</div>
+      <div class="gapbar">
+        <div class="gl"><span>今の投資額</span><span>あなたの目標</span></div>
+        <div class="track"><div class="cur" id="bar-cur">今</div><div class="gap" id="bar-gap">+<span id="gap-in">4</span>万</div></div>
+        <div class="cap" id="gap-cap">この“ピンクの差”を埋めるのが、投資フェーズへの最短ルート</div>
       </div>
     </div>
-    <div class="block"><h3><span class="ic">💪</span>あなたの強み</h3><p id="r-strength">—</p></div>
-    <div class="block forest"><h3><span class="ic">🔑</span>次の一歩のカギ</h3><p id="r-wall">—</p></div>
-    <button class="btn forest" onclick="toDemo()">じゃあ、あなたの"眠ってる余力"を見える化してみる<small>▶ 30秒のミニ体験へ</small></button>
-    <div class="restart"><a onclick="restart()">もう一度診断する</a></div>
-  </section>
 
-  <!-- DEMO -->
-  <section class="view" id="v-demo">
-    <div class="demo-intro">
-      <h2>あなたの"次に回せる余力"📊</h2>
-      <p>今の毎月の固定費、いちばん近いのはどれ？<br>見直しで浮く=投資に回せるお金の目安を出します（体験版）</p>
+    <div class="block pink">
+      <h3><span class="ic">🎯</span>あなたの場合、カギは“ここ”</h3>
+      <p id="r-reason">—</p>
     </div>
-    <div class="picker" id="picker"></div>
-    <div id="gauge-slot"></div>
-    <button class="btn" id="demo-next" style="display:none" onclick="toCTA()">この余力を"投資フェーズ"に変える設計を見る<small>▶ あなた専用の一歩へ</small></button>
-  </section>
 
-  <!-- CTA -->
-  <section class="view" id="v-cta">
+    <div class="prep">
+      <div class="ph">🔑 その「+<span id="prep-gap">4</span>万円」の作り方＝勉強会の中身です</div>
+      <div class="pi"><span class="no">1</span><span class="tx">家に眠るモノを“入金力”に変える</span><span class="lock">🔒</span></div>
+      <div class="pi"><span class="no">2</span><span class="tx">固定費を最適化して、回せるお金を増やす</span><span class="lock">🔒</span></div>
+      <div class="pi"><span class="no">3</span><span class="tx">毎月“自動で投資に回る”仕組みにする</span><span class="lock">🔒</span></div>
+      <div class="pn">💡 先にこの診断で自分の数字を知っておくと、当日の内容が全部“自分ごと”になります。</div>
+    </div>
+
     <div class="cta-card">
-      <div class="cface">🌱</div>
-      <h2 id="cta-h">あなたの次の一歩は<br><span class="ul" id="cta-seg">—</span></h2>
-      <p id="cta-p">今日見えた"余力"を、実際に「投資に回すお金」へ変える設計を、あなたの数字でやってみる場を用意しました。</p>
-      <div class="list">
-        <div class="li"><span class="ck">1</span><span>診断フェーズ別に「あなたの次の一手」を解説</span></div>
-        <div class="li"><span class="ck">2</span><span>3銀行1証券の"その先"＝余力を投資に回す設計を体験</span></div>
-        <div class="li"><span class="ck">3</span><span>「動ける人」だけが持ち帰る、次の90日プラン</span></div>
-      </div>
-      <button class="btn" style="margin-top:18px;background:#fff;color:var(--forest-d)" onclick="alert('※モックアップです。ここに勉強会予約LINE/フォームが入ります');">無料の勉強会で自分の数字でやってみる<small>▶ 所要90分・スマホ1台でOK</small></button>
+      <div class="cd" id="cta-date">◯月◯日(◯) 夜21:00〜</div>
+      <h2>あなたの「+<span id="cta-gap">4</span>万円」の作り方を、<br>この勉強会で持ち帰りませんか？</h2>
+      <p>診断で見えた“あと月いくら”を、実際に自分の数字で埋めていく90分。スマホ1台でOKです。</p>
+      <button class="btn" onclick="alert('※モックです。ここに勉強会予約LINE/フォームが入ります');">この勉強会の席をとる</button>
+      <div class="seat">▶ 「次に進みたい」その気持ちがある方向けの内容です</div>
     </div>
-    <div class="block" style="margin-top:18px">
+
+    <div class="block" style="margin-top:16px">
       <h3><span class="ic">💬</span>最後に、今の気持ちに近いスタンプを1つ</h3>
       <p style="font-size:12.5px;color:var(--ink-soft)">押すだけでOK。あなたの本音、そっと受け取ります。</p>
       <div class="stamp-row">
-        <button class="stampbtn" onclick="stamp(this)"><span class="em">🔥</span>次に進みたい</button>
+        <button class="stampbtn" onclick="stamp(this)"><span class="em">🔥</span>その差を埋めたい</button>
         <button class="stampbtn" onclick="stamp(this)"><span class="em">🤔</span>まだ整えたい</button>
-        <button class="stampbtn" onclick="stamp(this)"><span class="em">👀</span>気になってた</button>
+        <button class="stampbtn" onclick="stamp(this)"><span class="em">👀</span>数字にドキッ</button>
       </div>
     </div>
     <div class="restart"><a onclick="restart()">もう一度診断する</a></div>
   </section>
 </div>
-<div class="mockbadge">これは <b>提案用モックアップ</b> です／実データ・予約導線は本番接続で差し込みます</div>
+<div class="mockbadge">これは <b>提案用モックアップ</b> です／勉強会の日程・予約導線・数値は本番接続で差し込みます</div>
 
 <script>
+/* ====== 勉強会情報：ここ1か所を差し替えれば全画面に反映 ====== */
+var SEMINAR = { date: "◯月◯日(◯)", time: "夜21:00〜", name: "投資フェーズ勉強会", url: "#" };
+
 var QUESTIONS = [
-  { no:1, q:"「3銀行1証券」の仕組み、今どのくらい回せていますか？",
+  { no:1, q:"いま毎月、投資（NISA・つみたて等）にいくら回せていますか？",
     opts:[
-      {t:"バッチリ回っている", em:"✅", a:{base:2,see:2}},
-      {t:"作ったけど活かしきれていない", em:"🔧", a:{base:1,see:1}},
-      {t:"作ったが、止まりがち", em:"⏸", a:{base:1,see:0}},
-      {t:"これから整えるところ", em:"🌱", a:{base:0,see:0}},
-    ]},
-  { no:2, q:"毎月、意識しなくても“貯まる・投資に回る“仕組みはありますか？",
+      { t:"ほぼ回せていない（0円）", em:"😔", cur:0 },
+      { t:"月1万円くらい", em:"🌱", cur:1 },
+      { t:"月1〜3万円くらい", em:"🌿", cur:2 },
+      { t:"月3万円以上は回せている", em:"🌳", cur:4 },
+    ], key:"cur" },
+  { no:2, q:"本当は毎月、いくら投資に回せる状態になりたいですか？",
     opts:[
-      {t:"自動で回る仕組みがある", em:"🔁", a:{base:2,go:1}},
-      {t:"手動でなんとかやっている", em:"✋", a:{base:1}},
-      {t:"月によってバラバラ", em:"🌊", a:{base:0}},
-      {t:"まだ仕組みはない", em:"🔰", a:{base:0}},
-    ]},
-  { no:3, q:"毎月のお金の流れ、“見える化“できていますか？",
+      { t:"まず月+3万円", em:"🎯", tgt:3 },
+      { t:"月+5万円は回したい", em:"🚀", tgt:5 },
+      { t:"月+10万円を目指したい", em:"⭐", tgt:10 },
+      { t:"できるだけ多く", em:"🔥", tgt:13 },
+    ], key:"tgt" },
+  { no:3, q:"「もっと回したいのに回せない」——いちばんの理由は？",
     opts:[
-      {t:"収支も投資も把握できている", em:"📊", a:{see:2}},
-      {t:"なんとなくは分かる", em:"👀", a:{see:1}},
-      {t:"正直、ふわっとしている", em:"☁️", a:{see:0}},
-    ]},
-  { no:4, q:"いま一番“前に進めたい“のはどれ？",
-    opts:[
-      {t:"守りの土台をもっと固めたい", em:"🛡", a:{base:1}},
-      {t:"ムダを削って余力を作りたい", em:"✂️", a:{see:1}},
-      {t:"投資フェーズにしっかり進みたい", em:"📈", a:{go:2}},
-      {t:"まず方向を決めたい", em:"🧭", a:{go:0}},
-    ]},
-  { no:5, q:"次に進むために、月あと“いくら“の余力を作れたら理想？",
-    opts:[
-      {t:"まず +1万円から", em:"🌱", a:{}},
-      {t:"+3万円は作りたい", em:"🌿", a:{}},
-      {t:"+5万円以上、投資に回したい", em:"🌳", a:{go:1}},
-      {t:"金額より、まず設計を知りたい", em:"🧭", a:{}},
-    ], key:"goal"},
-  { no:6, q:"今の気持ちに、いちばん近いのは？",
-    opts:[
-      {t:"準備はできた。次に進みたい", em:"🔥", a:{go:2}},
-      {t:"やり方さえ分かれば動ける", em:"💡", a:{go:1}},
-      {t:"もう少し土台を整えたい", em:"🧱", a:{base:1}},
-      {t:"方向が定まらず足踏み中", em:"🌀", a:{go:0}},
-    ], key:"mood"},
+      { t:"収入を、あと少し増やしたい", em:"💰", reason:"zoushuu" },
+      { t:"固定費が重くて、手元に残らない", em:"✂️", reason:"kotei" },
+      { t:"作れても、何に回すか迷う", em:"🧭", reason:"mayou" },
+      { t:"わかってるけど、行動できてない", em:"🌀", reason:"koudou" },
+    ], key:"reason" },
 ];
 
-var TYPES = {
-  josou:{ face:"📈", name:"投資助走フェーズ",
-    sub:"土台は完成。あとは“その先“の設計だけ",
-    desc:"あなたは3銀行1証券の土台をしっかり作り、お金の流れも見えている状態。もう“守り“は十分です。次にやるべきは、その余力を“増やすお金“に変える設計。ここまで来た人だけが進める、いちばん面白いフェーズに立っています。",
-    strength:"仕組み化と見える化の両方ができている実行力。多くの人がここで止まる中、あなたは“その先“に手が届く位置にいます。",
-    wall:"カギは<b>「余力を投資に回す具体設計」</b>。土台があるあなたは、正しい順番を知るだけで一気に進めます。",
-    seg:"余力を“増やすお金“に回す設計をすること", m:[85,85,90] },
-  hamidashi:{ face:"✂️", name:"はみ出し家計フェーズ",
-    sub:"収入も土台もある。あとは“漏れ“を締めるだけ",
-    desc:"あなたは基礎ができていて、進む力もある。でもお金の流れのどこかに“漏れ“があり、余力になりきれていない状態。ここを締めれば、投資に回せるお金がスッと生まれます。伸びしろがいちばん大きいフェーズです。",
-    strength:"土台と行動力はある。あとは最適化するだけで結果が出る、“あと一歩“の位置にいます。",
-    wall:"カギは<b>「見える化と最適化」</b>。どこが漏れているかを可視化すれば、そのまま余力＝投資資金に変わります。",
-    seg:"お金の“漏れ“を締めて余力を作ること", m:[70,55,72] },
-  tsuchi:{ face:"🛡", name:"土台かため中フェーズ",
-    sub:"守りを構築中。次の攻めは、もうすぐ",
-    desc:"あなたは今、3銀行1証券の土台をコツコツ固めている最中。焦らなくて大丈夫、順番は合っています。土台が整えば、次の“攻め“の一歩は自然と見えてきます。今は仕組みを“自動で回る“状態にするのが近道です。",
-    strength:"基礎を飛ばさずに積み上げる堅実さ。この土台は、後から投資フェーズで大きな差になります。",
-    wall:"カギは<b>「仕組みを自動で回す状態にする」</b>こと。手動を自動に変えると、余力が安定して生まれます。",
-    seg:"仕組みを“自動で回る“状態にすること", m:[75,60,50] },
-  houkou:{ face:"🧭", name:"方向さがしフェーズ",
-    sub:"頑張ってる。あとは“進む向き“を1本決めるだけ",
-    desc:"あなたはお金と向き合う意識はしっかりある。ただ、やることが多くて方向が定まらず、足踏みしている状態。ここで大事なのは“全部やる“ことではなく、次に進む一本の道を決めること。決まれば、あなたの実行力は一気に動き出します。",
-    strength:"お金に向き合い続けている真面目さ。方向さえ定まれば、走り出せる力を持っています。",
-    wall:"カギは<b>「次に進む向きを1本に絞る」</b>こと。あれこれ手を広げず、順番を決めるだけで前に進めます。",
-    seg:"次に進む向きを1本に決めること", m:[55,50,55] },
+var REASONS = {
+  zoushuu:{ tx:"答えはシンプルです。足りないのは知識ではなく<b>“入金力＝毎月の収入をあと少し増やすこと”</b>。この診断で出た金額を、副収入で作る具体策が、いちばんの近道です。" },
+  kotei:{ tx:"あなたの場合、<b>固定費の最適化だけで“あと月いくら”の一部は作れます</b>。削って浮いたお金を、そのまま投資に回す設計に変えるのがカギです。" },
+  mayou:{ tx:"お金を作る力はある。あとは<b>“作ったお金を、どこに回すか”の順番</b>を決めるだけ。まず必要額を作る導線と、回す先の設計をセットで持つのが近道です。" },
+  koudou:{ tx:"知識は十分あります。足りないのは<b>“最初の一歩の型”</b>だけ。この診断で数字が見えた今が、動き出す一番のタイミングです。" },
 };
 
-var state = { i:0, base:0, see:0, go:0, goal:null, mood:null, picked:null };
-function show(id){ document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');}); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
-function start(){ state={i:0,base:0,see:0,go:0,goal:null,mood:null,picked:null}; show('v-quiz'); renderQ(); }
-function restart(){ show('v-intro'); }
+var state = { i:0, cur:0, tgt:3, reason:"zoushuu" };
+
+function show(id){ document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("on"); }); document.getElementById(id).classList.add("on"); window.scrollTo(0,0); }
+function applySeminar(){
+  document.getElementById("sem-date").textContent = SEMINAR.date;
+  document.getElementById("sem-time").textContent = SEMINAR.time;
+  document.getElementById("sem-name").textContent = SEMINAR.name;
+  document.getElementById("cta-date").textContent = SEMINAR.date + " " + SEMINAR.time;
+}
+function start(){ state = { i:0, cur:0, tgt:3, reason:"zoushuu" }; show("v-quiz"); renderQ(); }
+function restart(){ show("v-intro"); }
 
 function renderQ(){
-  var q=QUESTIONS[state.i];
-  document.getElementById('q-count').textContent='質問 '+q.no+' / 6';
-  var pct=Math.round(q.no/6*100);
-  document.getElementById('q-pct').textContent=pct+'%';
-  document.getElementById('q-fill').style.width=pct+'%';
-  var html='<div class="qwrap"><div class="q-no">Q'+q.no+'</div><div class="q-ttl">'+q.q+'</div><div class="opts">';
-  q.opts.forEach(function(o,idx){ html+='<button class="opt" onclick="pick('+idx+')"><span class="em">'+o.em+'</span><span>'+o.t+'</span></button>'; });
-  html+='</div></div>';
-  document.getElementById('q-slot').innerHTML=html;
+  var q = QUESTIONS[state.i];
+  document.getElementById("q-count").textContent = "質問 " + q.no + " / 3";
+  var pct = Math.round(q.no/3*100);
+  document.getElementById("q-pct").textContent = pct + "%";
+  document.getElementById("q-fill").style.width = pct + "%";
+  var html = '<div class="qwrap"><div class="q-no">Q' + q.no + '</div><div class="q-ttl">' + q.q + '</div><div class="opts">';
+  q.opts.forEach(function(o,idx){ html += '<button class="opt" onclick="pick(' + idx + ')"><span class="em">' + o.em + '</span><span>' + o.t + '</span></button>'; });
+  html += '</div></div>';
+  document.getElementById("q-slot").innerHTML = html;
 }
 function pick(idx){
-  var q=QUESTIONS[state.i], o=q.opts[idx], a=o.a||{};
-  if(a.base) state.base+=a.base;
-  if(a.see)  state.see +=a.see;
-  if(a.go)   state.go  +=a.go;
-  if(q.key==='goal') state.goal=idx;
-  if(q.key==='mood') state.mood=idx;
-  document.querySelectorAll('#q-slot .opt')[idx].classList.add('sel');
-  setTimeout(function(){ state.i++; if(state.i<QUESTIONS.length) renderQ(); else runCalc(); },260);
+  var q = QUESTIONS[state.i], o = q.opts[idx];
+  if(q.key === "cur") state.cur = o.cur;
+  if(q.key === "tgt") state.tgt = o.tgt;
+  if(q.key === "reason") state.reason = o.reason;
+  document.querySelectorAll("#q-slot .opt")[idx].classList.add("sel");
+  setTimeout(function(){ state.i++; if(state.i < QUESTIONS.length) renderQ(); else runCalc(); }, 260);
 }
 function runCalc(){
-  show('v-calc');
-  var msgs=['あなたのフェーズを見ています…','お金の土台と余力を計算中…','次の一歩を探しています…'];
-  var mi=0, el=document.getElementById('calc-msg'); el.textContent=msgs[0];
-  var t=setInterval(function(){ mi++; if(mi<msgs.length) el.textContent=msgs[mi]; },620);
-  setTimeout(function(){ clearInterval(t); showResult(); },2000);
-}
-function decideType(){
-  var base=state.base, see=state.see, go=state.go;
-  if(go>=3 && base>=2) return 'josou';
-  if(base>=2 && see<=2) return 'hamidashi';
-  if(base>=2) return 'tsuchi';
-  if(go<=1 && base<=1) return 'houkou';
-  return 'tsuchi';
+  show("v-calc");
+  var msgs = ["あなたの“あと月いくら”を計算中…","今の入金力と目標の差を見ています…","投資フェーズまでの距離を出しています…"];
+  var mi = 0, el = document.getElementById("calc-msg"); el.textContent = msgs[0];
+  var t = setInterval(function(){ mi++; if(mi < msgs.length) el.textContent = msgs[mi]; }, 620);
+  setTimeout(function(){ clearInterval(t); showResult(); }, 1900);
 }
 function showResult(){
-  var key=decideType(), t=TYPES[key]; state.typeKey=key;
-  document.getElementById('r-face').textContent=t.face;
-  document.getElementById('r-name').innerHTML=t.name+'<span class="s">'+t.sub+'</span>';
-  document.getElementById('r-desc').innerHTML=t.desc;
-  document.getElementById('r-strength').innerHTML=t.strength;
-  document.getElementById('r-wall').innerHTML=t.wall;
-  document.getElementById('cta-seg').textContent=t.seg;
-  ['m1','m2','m3'].forEach(function(id,ix){ var v=t.m[ix]; document.getElementById(id+'v').textContent=(v>=80?'たっぷり':v>=60?'しっかり':'これから')+' '+v; });
-  show('v-result');
-  setTimeout(function(){ document.getElementById('m1').style.width=t.m[0]+'%'; document.getElementById('m2').style.width=t.m[1]+'%'; document.getElementById('m3').style.width=t.m[2]+'%'; },200);
+  var gap = state.tgt - state.cur;
+  var near = gap <= 0;
+  if(near) gap = 1;
+  var r = REASONS[state.reason];
+  document.getElementById("r-gap").textContent = gap;
+  document.getElementById("gap-in").textContent = gap;
+  document.getElementById("prep-gap").textContent = gap;
+  document.getElementById("cta-gap").textContent = gap;
+  document.getElementById("r-reason").innerHTML = r.tx;
+  if(near){
+    document.getElementById("r-sub").innerHTML = "あなたはもう投資フェーズの入口。あとは“回す先”の設計と、もう一段の上積みだけです。";
+    document.getElementById("gap-cap").textContent = "ほぼ届いています。あと一歩の上積みを勉強会で。";
+  } else {
+    document.getElementById("r-sub").innerHTML = "今の投資額（月" + state.cur + "万）から、目標（月" + state.tgt + "万）までの差です。";
+    document.getElementById("gap-cap").textContent = "この“ピンクの差”を埋めるのが、投資フェーズへの最短ルート";
+  }
+  document.getElementById("cta-date").textContent = SEMINAR.date + " " + SEMINAR.time;
+  show("v-result");
+  var total = Math.max(state.tgt, state.cur + gap);
+  var curPct = Math.round(state.cur / total * 100);
+  var gapPct = Math.round(gap / total * 100);
+  setTimeout(function(){
+    var bc = document.getElementById("bar-cur"), bg = document.getElementById("bar-gap");
+    bc.style.width = curPct + "%";
+    if(state.cur === 0) bc.textContent = "";
+    bg.style.left = curPct + "%";
+    bg.style.width = gapPct + "%";
+    bg.style.opacity = "1";
+  }, 220);
 }
+function stamp(el){ document.querySelectorAll(".stamp-row .stampbtn").forEach(function(b){ b.classList.remove("on"); }); el.classList.add("on"); }
 
-/* ミニ体験：固定費規模→年間で作れる余力レンジ */
-var TIERS = [
-  {k:'s', em:'🍃', name:'固定費は軽め（月15万くらいまで）', lo:3, mid:8,  hi:15, note:'サブスク・通信・保険の見直しだけでも年数万円は作れます。'},
-  {k:'m', em:'🏠', name:'標準的（月15〜25万くらい）',        lo:6, mid:15, hi:30, note:'固定費の最適化で、投資に回せる余力がまとまって生まれます。'},
-  {k:'l', em:'🏡', name:'ゆとりめ（月25〜40万くらい）',      lo:12,mid:28, hi:55, note:'固定費が大きいほど“漏れ“も大きく、締めた時の余力も大きい。'},
-  {k:'x', em:'✨', name:'まだ把握できていない',              lo:5, mid:15, hi:35, note:'まず“見える化“するだけで、眠っている余力がはっきりします。'},
-];
-function renderPicker(){
-  var html=''; TIERS.forEach(function(it,ix){ html+='<button class="pick" onclick="pickItem('+ix+')"><span class="em">'+it.em+'</span>'+it.name+'</button>'; });
-  document.getElementById('picker').innerHTML=html;
-}
-function pickItem(ix){
-  var it=TIERS[ix]; state.picked=ix;
-  document.querySelectorAll('#picker .pick').forEach(function(p,i){ p.classList.toggle('sel', i===ix); });
-  var html='<div class="gauge">'
-    +'<div class="glabel">'+it.em+' 見直しで“投資に回せる余力“の目安（年間）</div>'
-    +'<div class="gitem">'+it.name+'</div>'
-    +'<div class="gprice">年 <span class="big">+'+it.mid+'万円</span> ほど</div>'
-    +'<div class="grange"><span class="pin" style="left:0%"></span></div>'
-    +'<div class="gsub"><span>+'+it.lo+'万</span><span>目安のまん中</span><span>+'+it.hi+'万〜</span></div>'
-    +'<div class="gnote">💡 '+it.note+'<br><b>この“余力をどこに回すか“の設計を、勉強会であなたの数字でやります。</b></div>'
-    +'</div>';
-  document.getElementById('gauge-slot').innerHTML=html;
-  setTimeout(function(){ var pin=document.querySelector('.grange .pin'); if(pin) pin.style.left='56%'; },120);
-  var n=document.getElementById('demo-next'); n.style.display='block'; n.scrollIntoView({behavior:'smooth',block:'center'});
-}
-function toDemo(){ show('v-demo'); renderPicker(); document.getElementById('demo-next').style.display='none'; document.getElementById('gauge-slot').innerHTML=''; }
-function toCTA(){ show('v-cta'); }
-function stamp(el){ document.querySelectorAll('.stamp-row .stampbtn').forEach(function(b){b.classList.remove('on');}); el.classList.add('on'); }
+applySeminar();
 </script>
 </body>
 </html>
