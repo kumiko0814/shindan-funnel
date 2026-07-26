@@ -49,6 +49,13 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
 .datebar .dd{font-size:19px;font-weight:900;margin:3px 0 1px;}
 .datebar .dt{font-size:12px;opacity:.92;}
 .datebar .pre{display:inline-block;margin-top:8px;font-size:11px;background:rgba(255,255,255,.16);border-radius:20px;padding:4px 12px;font-weight:700;}
+/* 診断中でも予約できる常時ボタン */
+.floatResv{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;max-width:440px;margin:0 auto;padding:0 14px 10px;pointer-events:none;}
+.floatResv .inner{pointer-events:auto;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);border:1px solid var(--pink-soft);border-radius:16px;padding:8px 10px 8px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(42,63,99,.18);}
+.floatResv .cap{flex:1;font-size:11px;font-weight:700;color:var(--navy);line-height:1.35;}
+.floatResv .cap b{color:var(--pink-d);}
+.floatResv button{flex-shrink:0;background:linear-gradient(135deg,var(--pink),var(--pink-d));color:#fff;border:none;border-radius:13px;padding:11px 15px;font-family:inherit;font-weight:900;font-size:13px;box-shadow:0 6px 16px rgba(214,120,150,.4);cursor:pointer;transition:transform .12s;}
+.floatResv button:active{transform:translateY(1px);}
 
 .hero{text-align:center;padding:14px 6px 6px;}
 .hero .kicker{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--sky);border-radius:20px;padding:4px 13px;margin-bottom:14px;}
@@ -245,7 +252,7 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
         <div class="li"><span class="ck">2</span><span>おうちの物をAIが値付け→出品文まで自動作成を体験</span></div>
         <div class="li"><span class="ck">3</span><span>「まず月+3万」までの続け方を、その場で持ち帰り</span></div>
       </div>
-      <button class="btn green" style="margin-top:18px" onclick="alert('※モックアップです。ここに勉強会予約LINE/フォームが入ります');">この勉強会の席をとる<small>▶ 所要90分・スマホ1台・おうちからOK</small></button>
+      <button class="btn green" style="margin-top:18px" onclick="reserve()">この勉強会の席をとる<small>▶ 所要90分・スマホ1台・おうちからOK</small></button>
     </div>
     <div class="block" style="margin-top:18px">
       <h3><span class="ic">💬</span>最後に、今の気持ちに近いスタンプを1つ</h3>
@@ -259,11 +266,12 @@ body{font-family:"游ゴシック体",YuGothic,"Noto Sans JP",sans-serif;color:v
     <div class="restart"><a onclick="restart()">もう一度診断する</a></div>
   </section>
 </div>
-<div class="mockbadge">これは <b>提案用モックアップ</b> です／実データ・予約導線は本番接続で差し込みます</div>
+<div class="floatResv" id="floatResv"><div class="inner"><div class="cap">診断の途中でも大丈夫☺️<br><b>先に7/29の席だけ</b>とっておけます</div><button onclick="reserve()">🎟 席をとる</button></div></div>
+<div class="mockbadge">これは <b>提案用モックアップ</b> です／予約LINEは接続済み・相場の数値は仮です</div>
 
 <script>
 /* ====== 勉強会情報：ここ1か所を差し替えれば全画面に反映 ====== */
-var SEMINAR = { date: "7月29日(水)", time: "よる21:00〜", name: "おうち時間で、はじめての+3万円 勉強会", url: "#" };
+var SEMINAR = { date: "7月29日(水)", time: "よる21:00〜", name: "おうち時間で、はじめての+3万円 勉強会", url: "https://kgp3b9or.autosns.app/line" };
 function applySeminar(){
   document.getElementById("sem-date").textContent = SEMINAR.date;
   document.getElementById("sem-time").textContent = SEMINAR.time;
@@ -273,46 +281,46 @@ function applySeminar(){
 
 /* ===================== 診断ロジック ===================== */
 var QUESTIONS = [
-  { no:1, q:"おうちに、着てない服・使ってない物ってどれくらいありますか？",
+  { no:1, q:"在宅で収入づくり、今の気持ちにいちばん近いのは？",
     opts:[
-      {t:"クローゼットや押し入れにたくさん…😅", em:"📦", a:{asset:2,act:0}},
-      {t:"そこそこある（見返せば出てくる）", em:"👕", a:{asset:1,act:0}},
-      {t:"あまりない・厳選してるほう", em:"✨", a:{asset:0,act:0}},
-    ]},
-  { no:2, q:"メルカリなどのフリマ、やったことありますか？",
-    opts:[
-      {t:"売れた経験がある", em:"🙆‍♀️", a:{asset:1,act:2}},
-      {t:"出したけど、売れずに止まってる", em:"😓", a:{asset:1,act:1}},
-      {t:"登録だけ・見てるだけ", em:"👀", a:{asset:0,act:1}},
-      {t:"やったことない", em:"🔰", a:{asset:0,act:0}},
-    ]},
-  { no:3, q:"「これ売れるかな？」と思った時、どうすることが多い？",
-    opts:[
-      {t:"とりあえず出してみる", em:"🏃‍♀️", a:{act:2}},
-      {t:"相場を調べて…そのうち止まる", em:"🔍", a:{act:1}},
-      {t:"考えるだけで、そのまま", em:"💭", a:{act:0}},
-    ]},
-  { no:4, q:"在宅で収入、いま一番の“ひっかかり“はどれ？",
+      {t:"まず一歩、踏み出したい", em:"🚪", a:{act:1}},
+      {t:"自分に合うやり方を知りたい", em:"📖", a:{asset:1}},
+      {t:"続けられる仕組みが欲しい", em:"🔁", a:{act:1}},
+      {t:"自分にできるか、まだ不安", em:"💗", a:{act:0}},
+    ], key:"mood"},
+  { no:2, q:"在宅で収入、いま一番の“ひっかかり“はどれ？",
     opts:[
       {t:"時間が取れるか不安", em:"⏰", a:{act:1}},
       {t:"やり方・自信がない", em:"🥺", a:{act:0}},
-      {t:"何を売ればいいか分からない", em:"❓", a:{asset:0}},
-      {t:"売る物はある。あとは売り方！", em:"💡", a:{asset:2,act:1}},
+      {t:"何から始めればいいか分からない", em:"❓", a:{asset:0}},
+      {t:"売れそうなモノもある。あとはやり方！", em:"💡", a:{asset:2,act:1}},
     ]},
-  { no:5, q:"月にあと“いくら“あったら、気持ちが軽くなりそう？",
+  { no:3, q:"月にあと“いくら“あったら、気持ちが軽くなりそう？",
     opts:[
       {t:"まず +3万円", em:"🌱", a:{}},
       {t:"できれば +5万円", em:"🌿", a:{}},
       {t:"+10万円いけたら…！", em:"🌳", a:{}},
       {t:"想像がつかない", em:"☁️", a:{}},
     ], key:"goal"},
-  { no:6, q:"今の気持ちに、いちばん近いのは？",
+  { no:4, q:"「これ、活かせるかな？」と思った時、どうすることが多い？",
     opts:[
-      {t:"まず一歩、踏み出したい", em:"🚪", a:{act:1}},
-      {t:"売れるコツを知りたい", em:"📖", a:{asset:1}},
-      {t:"続けられる仕組みが欲しい", em:"🔁", a:{act:1}},
-      {t:"自分にできるか、まだ不安", em:"💗", a:{act:0}},
-    ], key:"mood"},
+      {t:"とりあえずやってみる", em:"🏃‍♀️", a:{act:2}},
+      {t:"調べて…そのうち止まる", em:"🔍", a:{act:1}},
+      {t:"考えるだけで、そのまま", em:"💭", a:{act:0}},
+    ]},
+  { no:5, q:"ふとおうちを見回して、“使っていないモノ“ってどれくらいありそう？",
+    opts:[
+      {t:"クローゼットや押し入れにたくさん…😅", em:"📦", a:{asset:2,act:0}},
+      {t:"そこそこある（見返せば出てくる）", em:"👕", a:{asset:1,act:0}},
+      {t:"あまりない・厳選してるほう", em:"✨", a:{asset:0,act:0}},
+    ]},
+  { no:6, q:"フリマアプリで、何かを売った経験はありますか？",
+    opts:[
+      {t:"売れた経験がある", em:"🙆‍♀️", a:{asset:1,act:2}},
+      {t:"出したけど、そのまま止まってる", em:"😓", a:{asset:1,act:1}},
+      {t:"登録だけ・見てるだけ", em:"👀", a:{asset:0,act:1}},
+      {t:"やったことない", em:"🔰", a:{asset:0,act:0}},
+    ]},
 ];
 
 var TYPES = {
@@ -347,8 +355,11 @@ var state = { i:0, asset:0, act:0, goal:null, mood:null, picked:null };
 function show(id){
   document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
   document.getElementById(id).classList.add('on');
+  var fr=document.getElementById('floatResv');
+  if(fr) fr.style.display=(id==='v-quiz'||id==='v-calc'||id==='v-demo')?'block':'none';
   window.scrollTo(0,0);
 }
+function reserve(){ if(SEMINAR.url && SEMINAR.url!=='#'){ window.open(SEMINAR.url,'_blank'); } }
 function start(){ state={i:0,asset:0,act:0,goal:null,mood:null,picked:null}; show('v-quiz'); renderQ(); }
 function restart(){ show('v-intro'); }
 
