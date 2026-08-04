@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:750px;height:1000px;font-family:"游ゴシック体",YuGothic,"Hiragino Kaku Gothic ProN",sans-serif;background:linear-gradient(160deg,#FDF8EE,#F3F7F5);display:flex;align-items:center;justify-content:center;}
+.phone{width:560px;background:#1c1c1e;border-radius:52px;padding:16px;box-shadow:0 30px 60px rgba(42,42,42,.25);}
+.screen{background:#FFFFFF;border-radius:38px;overflow:hidden;}
+.head{background:#E8A24C;color:#fff;padding:26px 30px 22px;text-align:center;}
+.head .t{font-size:26px;font-weight:900;letter-spacing:.04em;}
+.head .s{font-size:15px;opacity:.95;margin-top:4px;}
+.body{padding:28px 30px 34px;}
+.photo{height:250px;border-radius:22px;background:linear-gradient(150deg,#EDEFF2,#DDE3E8);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;position:relative;overflow:hidden;}
+.photo .shirt{width:150px;height:120px;position:relative;}
+.photo .shirt .bd{position:absolute;left:25px;top:18px;width:100px;height:100px;background:#B98A5E;border-radius:12px 12px 18px 18px;}
+.photo .shirt .sl1{position:absolute;left:0;top:18px;width:34px;height:64px;background:#B98A5E;border-radius:12px 6px 10px 14px;transform:rotate(9deg);}
+.photo .shirt .sl2{position:absolute;right:0;top:18px;width:34px;height:64px;background:#B98A5E;border-radius:6px 12px 14px 10px;transform:rotate(-9deg);}
+.photo .shirt .nk{position:absolute;left:58px;top:10px;width:34px;height:16px;background:#EDEFF2;border-radius:0 0 20px 20px;border:4px solid #A87A50;border-top:none;}
+.photo .cap{font-size:13.5px;color:#7A828C;font-weight:700;background:rgba(255,255,255,.85);border-radius:20px;padding:5px 16px;}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#EAF4F2;color:#4E8E8A;font-size:14.5px;font-weight:900;border-radius:24px;padding:8px 18px;margin:22px 0 12px;}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:#7DB8B8;}
+.box{border:2px solid #F0E3C8;border-radius:18px;padding:18px 20px;margin-bottom:14px;background:#FFFDF7;}
+.box .lb{font-size:12.5px;color:#B48A3C;font-weight:900;letter-spacing:.08em;margin-bottom:6px;}
+.box .tx{font-size:17.5px;font-weight:800;color:#2A2A2A;line-height:1.55;}
+.box .tx.small{font-size:14.5px;font-weight:600;line-height:1.75;}
+.price{display:flex;align-items:center;justify-content:space-between;background:#FAE8A0;border-radius:18px;padding:16px 22px;}
+.price .lb{font-size:14px;font-weight:900;color:#8A6A20;}
+.price .v{font-size:26px;font-weight:900;color:#2A2A2A;}
+.note{text-align:center;font-size:13px;color:#9AA2AC;margin-top:16px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="phone"><div class="screen">
+  <div class="head"><div class="t">AIおたすけライト君</div><div class="s">写真をえらぶだけで、出品文が完成</div></div>
+  <div class="body">
+    <div class="photo"><div class="shirt"><div class="sl1"></div><div class="sl2"></div><div class="bd"></div><div class="nk"></div></div><div class="cap">スマホで撮った写真 1枚</div></div>
+    <div class="chip"><span class="dot"></span>AIが10秒で書きました</div>
+    <div class="box"><div class="lb">タイトル（40字）</div><div class="tx">coca ニット セーター ブラウン M レディース 秋冬 きれいめ 通勤 美品</div></div>
+    <div class="box"><div class="lb">紹介文</div><div class="tx small">数回着用のみの美品です。やわらかい肌ざわりで、デニムにもスカートにも合わせやすいお色です。おうちで採寸したサイズも記載しています☺</div></div>
+    <div class="price"><div class="lb">おすすめ販売価格</div><div class="v">¥1,880</div></div>
+    <div class="note">タイトル・紹介文・価格は、あとから自由に直せます</div>
+  </div>
+</div></div>
+</body>
+</html>
